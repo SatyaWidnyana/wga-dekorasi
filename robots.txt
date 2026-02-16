@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://wgadekorasi.com/sitemap.xml

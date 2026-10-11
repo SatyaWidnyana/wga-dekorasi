@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" /><title>Admin WGA Dekorasi</title>
+    <link rel="icon" href="assets/wga-mark-32.png" />
+    <link rel="prefetch" href="admin-moments.html" />
+    <link rel="prefetch" href="admin-catalog.html" />
+    <link rel="stylesheet" href="css/style.css?v=20261011" /><link
+      rel="stylesheet"
+      href="css/reviews.css?v=20261011"
+    />
+    <script src="js/review-shared.js?v=20261011" defer></script
+    ><script src="js/admin-login.js?v=20261011" defer></script>
+  </head>
+  <body class="review-page admin-page admin-login-page">
+    <header class="review-header"
+      ><div class="container review-nav"
+        ><a class="brand" href="index.html"
+          ><img src="assets/wga-mark-64.png" width="45" height="45" alt="" /><span class="title admin-brand-title"
+            >WGA <span class="brand-name-accent">Dekorasi</span> <span class="admin-label">Admin</span></span
+          ></a
+        ><div class="admin-nav-actions"
+          ><button id="logout" class="btn ghost admin-logout" type="button" hidden>Log out</button></div></div
+      ></header
+    >
+    <main class="container review-main">
+      <section id="login-panel" class="review-panel login-panel" aria-labelledby="login-title">
+        <p class="eyebrow">Ruang pengelola</p><h1 id="login-title">Selamat datang.</h1
+        ><p class="form-intro">Masuk untuk meninjau cerita dan pengalaman klien WGA.</p>
+        <p id="login-status" class="form-message" role="status">Menyiapkan login…</p>
+        <form id="login-form"
+          ><fieldset id="login-fields" disabled>
+            <label
+              >Email admin<input
+                name="email"
+                type="email"
+                autocomplete="username"
+                maxlength="254"
+                required
+            /></label>
+            <label
+              >Kata sandi<input
+                name="password"
+                type="password"
+                autocomplete="current-password"
+                minlength="8"
+                maxlength="128"
+                required
+            /></label> </fieldset
+          ><div id="captcha" class="captcha-slot"></div
+          ><button id="login-button" class="btn primary full-width" disabled
+            >Masuk ke dashboard</button
+          ></form
+        >
+        <p class="field-hint"
+          >Akses khusus pengelola yang terdaftar. Sesi berakhir maksimal satu jam setelah login.</p
+        >
+      </section>
+    </main>
+  </body>
+</html>

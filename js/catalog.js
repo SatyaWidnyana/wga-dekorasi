@@ -1,95 +1,251 @@
-(function(){
-  const items = [
-    {id:1, title:"Gayor + Angkul-Angkul", category:"Dekor", thumb:"assets/catalog/thumbs/page-01-thumb.webp", full:"assets/catalog/pages/page-01.webp"},
-    {id:2, title:"Gayor", category:"Dekor", thumb:"assets/catalog/thumbs/page-02-thumb.webp", full:"assets/catalog/pages/page-02.webp"},
-    {id:3, title:"Gayor Panggung", category:"Dekor", thumb:"assets/catalog/thumbs/page-03-thumb.webp", full:"assets/catalog/pages/page-03.webp"},
-    {id:4, title:"Tetaring", category:"Dekor", thumb:"assets/catalog/thumbs/page-04-thumb.webp", full:"assets/catalog/pages/page-04.webp"},
-    {id:5, title:"Photo Booth", category:"Dekor", thumb:"assets/catalog/thumbs/page-05-thumb.webp", full:"assets/catalog/pages/page-05.webp"},
-    {id:6, title:"Stand Foto", category:"Dekor", thumb:"assets/catalog/thumbs/page-06-thumb.webp", full:"assets/catalog/pages/page-06.webp"},
-    {id:7, title:"Tenda Kubu VIP / Kain", category:"Tenda", thumb:"assets/catalog/thumbs/page-07-thumb.webp", full:"assets/catalog/pages/page-07.webp"},
-    {id:8, title:"Tenda VIP / Kain", category:"Tenda", thumb:"assets/catalog/thumbs/page-08-thumb.webp", full:"assets/catalog/pages/page-08.webp"},
-    {id:9, title:"Tenda Biasa & Tenda Kubu", category:"Tenda", thumb:"assets/catalog/thumbs/page-09-thumb.webp", full:"assets/catalog/pages/page-09.webp"},
-    {id:10, title:"Tenda Pemios", category:"Tenda", thumb:"assets/catalog/thumbs/page-10-thumb.webp", full:"assets/catalog/pages/page-10.webp"},
-    {id:11, title:"Bale Metatah", category:"Dekor", thumb:"assets/catalog/thumbs/page-11-thumb.webp", full:"assets/catalog/pages/page-11.webp"},
-    {id:12, title:"Panggung / Triplek", category:"Panggung", thumb:"assets/catalog/thumbs/page-12-thumb.webp", full:"assets/catalog/pages/page-12.webp"},
-    {id:13, title:"Meja Buffe / Prasmanan", category:"Meja", thumb:"assets/catalog/thumbs/page-13-thumb.webp", full:"assets/catalog/pages/page-13.webp"},
-    {id:14, title:"Meja Panjang", category:"Meja", thumb:"assets/catalog/thumbs/page-14-thumb.webp", full:"assets/catalog/pages/page-14.webp"},
-    {id:15, title:"Meja Banten & Meja Kaca", category:"Meja", thumb:"assets/catalog/thumbs/page-15-thumb.webp", full:"assets/catalog/pages/page-15.webp"},
-    {id:16, title:"Meja Bundar", category:"Meja", thumb:"assets/catalog/thumbs/page-16-thumb.webp", full:"assets/catalog/pages/page-16.webp"},
-    {id:17, title:"Warung / Meja Welcome Drink", category:"Warung", thumb:"assets/catalog/thumbs/page-17-thumb.webp", full:"assets/catalog/pages/page-17.webp"},
-    {id:18, title:"Kursi", category:"Kursi", thumb:"assets/catalog/thumbs/page-18-thumb.webp", full:"assets/catalog/pages/page-18.webp"},
-    {id:19, title:"Sound & Lighting", category:"Sound & Lighting", thumb:"assets/catalog/thumbs/page-19-thumb.webp", full:"assets/catalog/pages/page-19.webp"},
-    {id:20, title:"TV & Kipas / Uap", category:"Peralatan", thumb:"assets/catalog/thumbs/page-20-thumb.webp", full:"assets/catalog/pages/page-20.webp"},
-    {id:21, title:"Alat Makan & Minum (1)", category:"Alat Makan", thumb:"assets/catalog/thumbs/page-21-thumb.webp", full:"assets/catalog/pages/page-21.webp"},
-    {id:22, title:"Alat Makan & Minum (2)", category:"Alat Makan", thumb:"assets/catalog/thumbs/page-22-thumb.webp", full:"assets/catalog/pages/page-22.webp"},
-    {id:23, title:"Alat Makan & Minum (3)", category:"Alat Makan", thumb:"assets/catalog/thumbs/page-23-thumb.webp", full:"assets/catalog/pages/page-23.webp"},
-    {id:24, title:"Alat Makan & Minum (4)", category:"Alat Makan", thumb:"assets/catalog/thumbs/page-24-thumb.webp", full:"assets/catalog/pages/page-24.webp"},
-    {id:25, title:"Kain Dinding", category:"Kain Dinding", thumb:"assets/catalog/thumbs/page-25-thumb.webp", full:"assets/catalog/pages/page-25.webp"},
-    {id:26, title:"Proyektor + Layar & Lampu", category:"Peralatan", thumb:"assets/catalog/thumbs/page-26-thumb.webp", full:"assets/catalog/pages/page-26.webp"},
-    {id:27, title:"Karpet & Sanggah Surya", category:"Peralatan", thumb:"assets/catalog/thumbs/page-27-thumb.webp", full:"assets/catalog/pages/page-27.webp"},
-  ];
+(() => {
+  const fallbackRecords = window.WGACatalog?.records || [];
+  const grid = document.getElementById('catalogGrid');
+  const home = document.getElementById('homeCatalogGrid');
+  const search = document.getElementById('q');
+  const chips = document.getElementById('chips');
+  const count = document.getElementById('count');
+  if (!grid && !home) return;
+  const more = document.createElement('button');
+  more.type = 'button';
+  more.className = 'btn btn-outline';
+  more.textContent = 'Muat lebih banyak';
+  more.hidden = true;
+  grid?.after(more);
+  const status = document.createElement('p');
+  status.className = 'field-hint';
+  status.setAttribute('role', 'status');
+  (grid || home).after(status);
+  let nextCursor = null,
+    loadId = 0,
+    controller,
+    offline = false,
+    hasLiveData = false,
+    searchTimer;
+  let loading = false;
+  const pager = grid
+    ? window.WGAAutoPager({ button: more, load: () => loadCatalog(Boolean(nextCursor)) })
+    : null;
+  function withLegacyAssets(record) {
+    const page = Number(record.legacy_page ?? record.id);
+    if (!Number.isInteger(page) || page < 1 || page > 9999) return record;
+    const padded = String(page).padStart(2, '0');
+    return {
+      ...record,
+      url: `assets/catalog/pages/page-${padded}.jpg`,
+      thumb_url: `assets/catalog/thumbs/page-${padded}-thumb.jpg`,
+    };
+  }
 
-  const chipsWrap = document.getElementById("chips");
-  const grid = document.getElementById("catalogGrid");
-  const q = document.getElementById("q");
-  const count = document.getElementById("count");
+  let records = fallbackRecords.map((item) => ({
+    ...item,
+    url: `assets/catalog/pages/page-${String(item.id).padStart(2, '0')}.jpg`,
+    thumb_url: `assets/catalog/thumbs/page-${String(item.id).padStart(2, '0')}-thumb.jpg`,
+  }));
+  let activeCategory = 'Semua';
+  const originalCache = new Map();
+  const normalize = (value) => value.toLocaleLowerCase('id').trim().replace(/\s+/g, ' ');
 
-  const cats = ["Semua", ...Array.from(new Set(items.map(i=>i.category)))];
+  function preloadOriginal(record) {
+    if (navigator.connection?.saveData || navigator.connection?.effectiveType === '2g') return;
+    if (!record.url || originalCache.has(record.url)) return;
+    const image = new Image();
+    image.decoding = 'async';
+    image.src = record.url;
+    originalCache.set(record.url, image);
+    if (originalCache.size > 12) originalCache.delete(originalCache.keys().next().value);
+  }
 
-  let activeCat = "Semua";
-
-  function makeChip(name){
-    const b = document.createElement("button");
-    b.className = "chip" + (name === activeCat ? " active" : "");
-    b.type = "button";
-    b.textContent = name;
-    b.addEventListener("click", ()=>{
-      activeCat = name;
-      document.querySelectorAll(".chip").forEach(x=>x.classList.remove("active"));
-      b.classList.add("active");
-      render();
+  function makeCard(record) {
+    const card = document.createElement('a');
+    card.className = 'catalog-card';
+    card.href = record.url;
+    card.target = '_blank';
+    card.rel = 'noopener noreferrer';
+    card.setAttribute('aria-label', `Lihat detail ${record.title}`);
+    const image = document.createElement('img');
+    image.src = record.thumb_url || record.url;
+    image.decoding = 'async';
+    image.alt = record.title;
+    image.className = 'catalog-card-img';
+    image.loading = 'lazy';
+    image.width = 480;
+    image.height = 679;
+    const body = document.createElement('div');
+    body.className = 'catalog-card-body';
+    const title = document.createElement('div');
+    title.className = 'catalog-card-title';
+    title.textContent = record.title;
+    const meta = document.createElement('div');
+    meta.className = 'catalog-card-meta';
+    const category = document.createElement('span');
+    category.textContent = record.category;
+    const arrow = document.createElement('span');
+    arrow.textContent = '↗';
+    meta.append(category, arrow);
+    body.append(title, meta);
+    card.append(image, body);
+    card.addEventListener('click', (event) => {
+      if (event.ctrlKey || event.metaKey || event.shiftKey || !window.WGALightbox) return;
+      event.preventDefault();
+      window.WGALightbox.open(record.url, record.title, record.thumb_url || record.url);
     });
-    return b;
-  }
-
-  function card(item){
-    const div = document.createElement("div");
-    div.className = "catalog-card";
-    div.setAttribute("role","button");
-    div.setAttribute("tabindex","0");
-    div.innerHTML = `
-      <img src="${item.thumb}" alt="${item.title}" loading="lazy">
-      <div class="body">
-        <div class="title">${item.title}</div>
-        <div class="meta">${item.category} • Halaman ${String(item.id).padStart(2,"0")}</div>
-      </div>
-    `;
-    const open = ()=> window.WGALightbox?.open(item.full, item.title);
-    div.addEventListener("click", open);
-    div.addEventListener("keydown", (e)=>{ if(e.key==="Enter" || e.key===" "){ e.preventDefault(); open(); } });
-    return div;
-  }
-
-  function render(){
-    const term = (q?.value || "").trim().toLowerCase();
-    const filtered = items.filter(it=>{
-      const catOk = activeCat === "Semua" ? true : it.category === activeCat;
-      const termOk = term ? it.title.toLowerCase().includes(term) : true;
-      return catOk && termOk;
+    card.addEventListener('pointerenter', () => preloadOriginal(record), { once: true });
+    card.addEventListener('focus', () => preloadOriginal(record), { once: true });
+    card.addEventListener('touchstart', () => preloadOriginal(record), {
+      once: true,
+      passive: true,
     });
-
-    grid.innerHTML = "";
-    filtered.forEach(it=> grid.appendChild(card(it)));
-
-    if(count) count.textContent = `${filtered.length} item ditampilkan`;
+    return card;
   }
 
-  if(chipsWrap){
-    cats.forEach(c=> chipsWrap.appendChild(makeChip(c)));
-  }
-  if(q){
-    q.addEventListener("input", ()=> render());
+  function render(container, items) {
+    if (!container) return;
+    container.replaceChildren(...items.map(makeCard));
   }
 
-  render();
+  function renderFilters(categories) {
+    if (!chips) return;
+    chips.replaceChildren();
+    ['Semua', ...categories].forEach((category) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'filter-chip';
+      button.classList.toggle('active', category === activeCategory);
+      button.textContent = category;
+      button.setAttribute('aria-pressed', String(category === activeCategory));
+      button.addEventListener('click', () => selectCategory(category));
+      chips.append(button);
+    });
+  }
+
+  function selectCategory(category) {
+    activeCategory = category;
+    chips?.querySelectorAll('button').forEach((button) => {
+      const selected = button.textContent === category;
+      button.classList.toggle('active', selected);
+      button.setAttribute('aria-pressed', String(selected));
+    });
+    if (offline) filter();
+    else loadCatalog();
+  }
+
+  function filter() {
+    const query = normalize(search?.value || '');
+    const shown = records.filter(
+      (record) =>
+        (activeCategory === 'Semua' || record.category === activeCategory) &&
+        normalize(record.title + ' ' + record.category).includes(query),
+    );
+    if (grid) {
+      render(grid, shown);
+      if (!shown.length) {
+        const empty = document.createElement('div');
+        empty.className = 'empty-state';
+        empty.innerHTML =
+          '<h2>Belum ada yang cocok.</h2><p>Coba kata kunci lain atau pilih kategori Semua.</p>';
+        grid.append(empty);
+      }
+    }
+    if (count) count.textContent = `${shown.length} dari ${records.length} item katalog`;
+  }
+
+  function renderAll(categories) {
+    render(home, records.slice(0, 10));
+    renderFilters(categories);
+    if (grid) filter();
+  }
+
+  function hasSameRecords(nextRecords) {
+    if (nextRecords.length !== records.length) return false;
+    return nextRecords.every((next, index) => {
+      const current = records[index];
+      return (
+        current?.title === next.title &&
+        current?.category === next.category &&
+        current?.url === next.url &&
+        current?.thumb_url === next.thumb_url
+      );
+    });
+  }
+
+  search?.addEventListener('input', () => {
+    clearTimeout(searchTimer);
+    // Invalidate older results immediately, before the debounced request starts.
+    loadId++;
+    controller?.abort();
+    pager?.update({ hasMore: false, busy: true, error: false });
+    searchTimer = setTimeout(() => loadCatalog(), 250);
+  });
+
+  async function loadCatalog(append = false) {
+    if (append && (loading || !nextCursor)) return;
+    if (!append) nextCursor = null;
+    loading = true;
+    pager?.update({ hasMore: !!nextCursor, busy: true, error: false });
+    const requestId = ++loadId;
+    controller?.abort();
+    controller = new AbortController();
+    const currentController = controller;
+    const timeout = setTimeout(() => currentController.abort(), 15000);
+    more.disabled = true;
+    status.textContent = 'Memuat katalog…';
+    const query = new URLSearchParams({ limit: home ? '10' : '24' });
+    if (activeCategory !== 'Semua') query.set('category', activeCategory);
+    if (search?.value.trim()) query.set('q', search.value.trim());
+    if (append && nextCursor) query.set('cursor', nextCursor);
+    try {
+      const response = await fetch(`/api/catalog?${query}`, {
+        credentials: 'same-origin',
+        headers: { Accept: 'application/json' },
+        signal: currentController.signal,
+      });
+      if (!response.ok) throw new Error('catalog unavailable');
+      const data = await response.json();
+      if (requestId !== loadId) return;
+      if (!Array.isArray(data.items)) throw new Error('catalog unavailable');
+      const nextRecords = data.items.map(withLegacyAssets);
+      if (append) {
+        const known = new Set(records.map((record) => record.id));
+        const added = nextRecords.filter((record) => !known.has(record.id));
+        records.push(...added);
+        grid.append(...added.map(makeCard));
+      } else {
+        if (!hasLiveData || !hasSameRecords(nextRecords)) render(grid || home, nextRecords);
+        records = nextRecords;
+      }
+      hasLiveData = true;
+      offline = false;
+      nextCursor = data.nextCursor;
+      pager?.update({ hasMore: !!nextCursor });
+      const categories = Array.isArray(data.categories)
+        ? data.categories.map((item) => item.name)
+        : [...new Set(records.map((record) => record.category))];
+      renderFilters(categories);
+      if (count)
+        count.textContent = `${records.length} item ditampilkan${nextCursor ? ' · masih ada lainnya' : ''}`;
+      status.textContent = records.length
+        ? grid && nextCursor
+          ? 'Scroll ke bawah untuk melihat foto berikutnya.'
+          : ''
+        : 'Belum ada item katalog yang cocok.';
+    } catch (error) {
+      if (requestId !== loadId) return;
+      pager?.update({ error: true });
+      if (!hasLiveData) {
+        offline = true;
+        renderAll([...new Set(records.map((record) => record.category))]);
+      }
+      status.textContent = hasLiveData
+        ? 'Katalog belum dapat diperbarui. Coba lagi sebentar.'
+        : 'Koneksi katalog terganggu. Menampilkan katalog cadangan; ketersediaan perlu dikonfirmasi.';
+    } finally {
+      clearTimeout(timeout);
+      if (requestId === loadId) {
+        loading = false;
+        pager?.update({ busy: false });
+      }
+    }
+  }
+  loadCatalog();
 })();

@@ -1,0 +1,18 @@
+{
+  "name": "wga-dekorasi",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": "24.x"
+  },
+  "scripts": {
+    "dev": "node --env-file-if-exists=.env.local scripts/dev-server.cjs",
+    "build": "node scripts/build.cjs",
+    "import:catalog": "node --env-file-if-exists=.env.local scripts/import-catalog.cjs",
+    "test": "node --test --test-isolation=none tests/*.test.cjs"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "0.5.8",
+    "sharp": "^0.35.5"
+  }
+}

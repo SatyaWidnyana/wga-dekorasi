@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>Upload Momen — Admin WGA Dekorasi</title>
+    <link rel="icon" href="assets/wga-mark-32.png" />
+    <link rel="prefetch" href="admin-catalog.html" />
+    <link rel="prefetch" href="admin-reviews.html" />
+    <link rel="stylesheet" href="css/style.css?v=20261011" />
+    <link rel="stylesheet" href="css/reviews.css?v=20261011" />
+    <script src="js/review-shared.js?v=20261011" defer></script>
+    <script src="js/admin-auth.js?v=20261011" defer></script>
+    <script src="js/admin-media.js?v=1" defer></script>
+    <script src="js/auto-pager.js?v=1" defer></script>
+    <script src="js/admin-gallery.js?v=3" defer></script>
+    <script src="js/admin-moments.js?v=4" defer></script>
+  </head>
+  <body class="review-page admin-page">
+    <header class="review-header">
+      <div class="container review-nav">
+        <a class="brand" href="index.html">
+          <img src="assets/wga-mark-64.png" width="45" height="45" alt="" />
+          <span class="title admin-brand-title">WGA <span class="brand-name-accent">Dekorasi</span> <span class="admin-label">Admin</span></span>
+        </a>
+        <nav class="admin-nav-links" aria-label="Navigasi admin">
+          <a href="admin-catalog.html">Kelola katalog</a>
+          <a aria-current="page" href="admin-moments.html">Upload momen</a>
+          <a href="admin-reviews.html">Kelola ulasan</a>
+        </nav>
+        <div class="admin-nav-actions">
+          <button id="logout" class="btn ghost admin-logout" type="button">Log out</button>
+        </div>
+      </div>
+    </header>
+    <main class="container review-main">
+      <section class="admin-page-heading" aria-labelledby="moment-page-title">
+        <p class="eyebrow">Galeri lapangan</p>
+        <h1 id="moment-page-title">Upload momen</h1>
+        <p class="form-intro">Tambahkan foto hasil pemasangan dan tampilkan berdasarkan kategori di halaman momen.</p>
+        <p id="admin-page-status" class="form-message" role="status"></p>
+      </section>
+      <section id="moment-panel" class="moment-admin-panel" aria-labelledby="moment-title">
+        <div class="panel-kicker">Tambah foto</div>
+        <h2 id="moment-title">Momen dekorasi</h2>
+        <p class="form-intro">Unggah foto hasil pemasangan dan pilih kategori katalog atau buat kategori baru.</p>
+        <form id="moment-form">
+          <label>Foto momen<input id="moment-file" type="file" accept="image/jpeg,image/png,image/webp" required /></label>
+          <label>Judul singkat (opsional)<input id="moment-title-input" maxlength="120" placeholder="Contoh: Dekorasi pernikahan di hotel" /></label>
+          <label>Kategori<select id="moment-category" required></select></label>
+          <label id="custom-category-wrap" hidden>Kategori baru<input id="custom-category" maxlength="60" placeholder="Contoh: Pernikahan Adat" /></label>
+          <div id="moment-upload-status" class="form-message" role="status"></div>
+          <button id="moment-upload-button" class="btn primary" type="submit">Upload momen</button>
+        </form>
+        <div class="moment-admin-heading"><h3>Foto yang sudah diunggah</h3><button id="refresh-moments" class="btn ghost" type="button">Muat ulang</button></div>
+        <div id="moment-admin-list" class="moment-admin-list"></div>
+      </section>
+    </main>
+  </body>
+</html>

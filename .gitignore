@@ -1,0 +1,7 @@
+.env*
+!.env.example
+node_modules/
+dist/
+.vercel/
+tmp/
+assets/catalog/WGA-Decoration-Catalogue.pdf

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Momen Dekorasi di Lapangan — WGA Dekorasi</title>
+    <meta name="description" content="Kumpulan momen hasil dekorasi dan pemasangan WGA Dekorasi di Bali." />
+    <link rel="icon" type="image/png" href="assets/wga-mark-32.png" />
+    <link rel="stylesheet" href="css/style.css?v=20261011" />
+    <link rel="stylesheet" href="css/moments.css?v=20261011" />
+    <script src="js/main.js?v=1" defer></script>
+    <script src="js/auto-pager.js?v=1" defer></script>
+    <script src="js/moments.js?v=20261011-2" defer></script>
+  </head>
+  <body class="moments-page">
+    <a class="skip-link" href="#main">Lewati ke konten</a>
+    <header id="header">
+      <div class="container">
+        <div class="nav-wrapper">
+          <a class="brand" href="index.html">
+            <img src="assets/wga-mark-64.png" alt="Logo WGA Dekorasi" width="45" height="45" />
+            <div><div class="title">WGA Dekorasi</div><div class="subtitle">Sewa Perlengkapan Event dan Dekorasi</div></div>
+          </a>
+          <nav class="nav-links" aria-label="Navigasi utama">
+            <a href="index.html#layanan">Layanan</a><a href="katalog.html">Katalog</a><a aria-current="page" href="momen.html">Momen</a><a href="index.html#tentang">Tentang</a><a href="index.html#kontak">Kontak</a><a href="ulasan.html">Tulis Ulasan</a>
+          </nav>
+          <div class="nav-cta"><a class="admin-access" href="admin.html" aria-label="Buka panel admin" title="Panel admin"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3"></path></svg></a><a class="btn ghost" href="katalog.html">Semua Katalog</a><a class="btn primary" href="https://wa.me/628179720727?text=Halo%20WGA%20Dekorasi%2C%20saya%20tertarik%20dengan%20layanan%20Anda.">Chat WhatsApp</a></div>
+          <a class="mobile-admin-access" href="admin.html" aria-label="Buka panel admin" title="Panel admin"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3"></path></svg></a>
+          <button class="menu-btn" id="menuBtn" type="button" aria-label="Buka menu" aria-expanded="false" aria-controls="mobileMenu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          </button>
+        </div>
+        <div class="mobile-menu" id="mobileMenu" hidden>
+          <a href="index.html#layanan">Layanan Kami</a><a href="katalog.html">Katalog</a><a href="momen.html">Momen di Lapangan</a><a href="index.html#tentang">Tentang WGA</a><a href="index.html#kontak">Kontak Kami</a><a href="ulasan.html">Tulis Ulasan</a>
+          <a class="btn primary" style="margin-top:16px;width:100%;text-align:center" href="https://wa.me/628179720727?text=Halo%20WGA%20Dekorasi...">Chat WhatsApp</a>
+        </div>
+      </div>
+    </header>
+    <main id="main" class="moments-main">
+      <section class="container moments-hero">
+        <p class="eyebrow">Cerita dari lapangan</p>
+        <h1>Setiap detail<br /><em>punya momennya.</em></h1>
+        <p class="moments-lead">Lihat hasil dekorasi dan pemasangan WGA di berbagai acara di Bali—dari persiapan hingga suasana yang selesai ditata.</p>
+      </section>
+      <section class="container moments-gallery" aria-labelledby="gallery-title">
+        <div class="moments-toolbar"><h2 id="gallery-title">Momen dekorasi kami</h2><div id="moment-filters" class="moment-filters" aria-label="Filter kategori"></div></div>
+        <p id="moments-status" class="moments-status" role="status">Memuat momen…</p>
+        <div id="moments-grid" class="moments-grid"></div>
+        <button id="moments-more" class="btn ghost moments-more" type="button" hidden>Muat momen lainnya</button>
+      </section>
+    </main>
+    <dialog id="moment-lightbox" class="moment-lightbox" aria-label="Pratinjau foto momen">
+      <button id="moment-lightbox-close" class="moment-lightbox-close" type="button" aria-label="Tutup">×</button>
+      <img id="moment-lightbox-image" alt="" />
+      <p id="moment-lightbox-caption"></p>
+    </dialog>
+    <footer><div class="container"><span>WGA Dekorasi · Bali</span><a href="index.html#kontak">Konsultasi acara ↗</a></div></footer>
+  </body>
+</html>

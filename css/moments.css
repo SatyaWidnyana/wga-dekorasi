@@ -1,0 +1,219 @@
+.moments-page {
+  background:
+    radial-gradient(circle at 88% 15%, #e0e6d855 0, transparent 25%),
+    linear-gradient(135deg, var(--paper) 40%, #f1eee5);
+}
+.moments-main {
+  position: relative;
+  overflow: hidden;
+  padding-block: 72px 80px;
+}
+.moments-main::before {
+  content: '';
+  position: absolute;
+  top: -260px;
+  right: -180px;
+  width: 620px;
+  height: 620px;
+  border: 1px solid #bdad8b2a;
+  border-radius: 50%;
+  box-shadow: 0 0 0 20px #bdad8b0c, 0 0 0 40px #bdad8b07;
+  pointer-events: none;
+}
+.moments-hero {
+  position: relative;
+  z-index: 1;
+  max-width: none;
+  margin-inline: auto;
+  margin-bottom: 70px;
+}
+.moments-hero h1 {
+  font-family: var(--display);
+  font-size: clamp(44px, 6vw, 76px);
+  letter-spacing: -0.045em;
+  line-height: 0.98;
+  margin-bottom: 25px;
+}
+.moments-hero h1 em {
+  color: var(--olive);
+  font-weight: 400;
+}
+.moments-lead {
+  max-width: 620px;
+  color: var(--text-muted);
+  text-align: justify;
+}
+.moments-gallery {
+  position: relative;
+  z-index: 1;
+}
+.moments-toolbar {
+  display: block;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 20px;
+  margin-bottom: 25px;
+}
+.moments-toolbar h2 {
+  font-family: var(--display);
+  font-size: 32px;
+  margin-bottom: 18px;
+}
+.moment-filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 7px;
+}
+.moment-filters .filter-chip {
+  min-height: 36px;
+  padding: 7px 12px;
+}
+.moments-status {
+  min-height: 28px;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+.moments-status[data-kind='error'] {
+  color: #8d352d;
+}
+.moments-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+.moment-card {
+  display: block;
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+  text-align: left;
+  color: var(--ink);
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: 0 10px 25px #35432d08;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.moment-card:hover {
+  transform: translateY(-4px);
+  border-color: #a0ac91;
+  box-shadow: 0 15px 30px #35432d16;
+}
+.moment-card img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background: var(--sand);
+}
+.moment-card-caption {
+  display: grid;
+  gap: 2px;
+  padding: 14px 16px 16px;
+}
+.moment-card-caption strong {
+  font-size: 13px;
+  line-height: 1.4;
+}
+.moment-card-caption small {
+  color: var(--gold);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.moments-more {
+  display: flex;
+  margin: 30px auto 0;
+}
+.moment-lightbox {
+  width: min(82vw, 900px);
+  max-width: calc(100vw - 32px);
+  max-height: 86vh;
+  margin: auto;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #292f28ee;
+  color: white;
+}
+.moment-lightbox::backdrop {
+  background: #20251dcc;
+}
+.moment-lightbox img {
+  width: 100%;
+  height: 68vh;
+  max-height: 68vh;
+  object-fit: contain;
+  margin-inline: auto;
+  visibility: hidden;
+}
+.moment-lightbox img.is-ready {
+  visibility: visible;
+}
+.moment-lightbox p {
+  margin-top: 12px;
+  color: #f4f0e6;
+  font-size: 13px;
+}
+.moment-lightbox-close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  color: white;
+  background: transparent;
+  font-size: 28px;
+}
+@media (max-width: 900px) {
+  .moments-main {
+    padding-block: 52px 62px;
+  }
+  .moments-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .moments-toolbar {
+    display: block;
+  }
+  .moment-filters {
+    justify-content: flex-start;
+    margin-top: 18px;
+  }
+}
+@media (max-width: 640px) {
+  .moments-hero {
+    margin-bottom: 48px;
+    text-align: center;
+  }
+  .moments-hero .eyebrow {
+    justify-content: center;
+  }
+  .moments-hero .eyebrow::before {
+    display: none;
+  }
+  .moments-hero h1 {
+    font-size: clamp(38px, 11vw, 56px);
+  }
+  .moments-lead {
+    margin-inline: auto;
+  }
+  .moments-toolbar h2 {
+    text-align: center;
+  }
+  .moment-filters {
+    justify-content: center;
+  }
+  .moments-grid {
+    gap: 12px;
+  }
+  .moment-card-caption {
+    padding: 11px;
+  }
+  .moment-lightbox {
+    width: calc(100vw - 24px);
+    padding: 12px;
+  }
+  .moment-lightbox img {
+    max-height: 72vh;
+  }
+}

@@ -1,0 +1,6 @@
+tmp/
+docs/
+tests/
+.env*
+README*
+assets/catalog/WGA-Decoration-Catalogue.pdf

@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Ulasan Klien — WGA Dekorasi</title>
+    <meta name="description" content="Bagikan pengalaman acara Anda bersama WGA Dekorasi." />
+    <link rel="icon" href="assets/wga-mark-32.png" />
+    <link rel="stylesheet" href="css/style.css?v=20261011" />
+    <link rel="stylesheet" href="css/reviews.css?v=20261011" />
+    <script src="js/main.js?v=1" defer></script>
+    <script src="js/review-shared.js?v=20261011" defer></script>
+    <script src="js/reviews.js?v=1" defer></script>
+  </head>
+  <body class="review-page">
+    <a class="skip-link" href="#main">Lewati ke konten</a>
+    <header id="header" class="review-header">
+      <div class="container">
+        <div class="nav-wrapper">
+          <a class="brand" href="index.html">
+            <img src="assets/wga-mark-64.png" alt="Logo WGA Dekorasi" width="45" height="45" />
+            <div><div class="title">WGA Dekorasi</div><div class="subtitle">Sewa Perlengkapan Event dan Dekorasi</div></div>
+          </a>
+          <nav class="nav-links" aria-label="Navigasi utama">
+            <a href="index.html#layanan">Layanan</a><a href="katalog.html">Katalog</a><a href="momen.html">Momen</a><a href="index.html#tentang">Tentang</a><a href="index.html#kontak">Kontak</a><a aria-current="page" href="ulasan.html">Tulis Ulasan</a>
+          </nav>
+          <div class="nav-cta"><a class="admin-access" href="admin.html" aria-label="Buka panel admin" title="Panel admin"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3"></path></svg></a><a class="btn ghost" href="katalog.html">Semua Katalog</a><a class="btn primary" href="https://wa.me/628179720727?text=Halo%20WGA%20Dekorasi%2C%20saya%20tertarik%20dengan%20layanan%20Anda.">Chat WhatsApp</a></div>
+          <a class="mobile-admin-access" href="admin.html" aria-label="Buka panel admin" title="Panel admin"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3"></path></svg></a>
+          <button class="menu-btn" id="menuBtn" type="button" aria-label="Buka menu" aria-expanded="false" aria-controls="mobileMenu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          </button>
+        </div>
+        <div class="mobile-menu" id="mobileMenu" hidden>
+          <a href="index.html#layanan">Layanan Kami</a><a href="katalog.html">Katalog</a><a href="momen.html">Momen di Lapangan</a><a href="index.html#tentang">Tentang WGA</a><a href="index.html#kontak">Kontak Kami</a><a href="ulasan.html">Tulis Ulasan</a>
+          <a class="btn primary" style="margin-top:16px;width:100%;text-align:center" href="https://wa.me/628179720727?text=Halo%20WGA%20Dekorasi...">Chat WhatsApp</a>
+        </div>
+      </div>
+    </header>
+    <main id="main" class="container review-main">
+      <div class="review-heading"
+        ><p class="eyebrow">Cerita dari klien kami</p>
+        <h1>Setiap acara,&nbsp;<br /><em>punya cerita.</em></h1>
+        <p
+          >Terima kasih sudah mempercayakan momen Anda kepada WGA. Ceritakan pengalaman Anda, agar
+          kami bisa terus memberikan pelayanan yang lebih baik.</p
+        >
+      </div>
+      <div class="review-layout">
+        <section class="review-panel" aria-labelledby="write-title">
+          <p class="panel-kicker">Bagikan pengalaman</p><h2 id="write-title">Tulis ulasan Anda</h2>
+          <p class="form-intro">Tanpa membuat akun. Ulasan akan langsung tampil setelah dikirim.</p>
+          <p id="form-status" role="status" class="form-message">Menyiapkan formulir…</p>
+          <form id="review-form">
+            <fieldset id="review-fields" disabled>
+              <div class="form-row"
+                ><label
+                  >Nama yang ditampilkan<input
+                    name="name"
+                    autocomplete="name"
+                    minlength="2"
+                    maxlength="80"
+                    required
+                    placeholder="Nama / Instansi / Perusahaan / Hotel"
+                /></label>
+                <label
+                  >Lokasi / kota<input
+                    name="location"
+                    autocomplete="address-level2"
+                    minlength="2"
+                    maxlength="100"
+                    required
+                    placeholder="Contoh: Denpasar" /></label
+              ></div>
+              <fieldset class="rating-field"
+                ><legend>Bagaimana pengalaman Anda?</legend
+                ><div class="rating-options">
+                  <label
+                    ><input type="radio" name="rating" value="1" required /><span
+                      >★<small>1</small></span
+                    ></label
+                  >
+                  <label
+                    ><input type="radio" name="rating" value="2" /><span
+                      >★<small>2</small></span
+                    ></label
+                  >
+                  <label
+                    ><input type="radio" name="rating" value="3" /><span
+                      >★<small>3</small></span
+                    ></label
+                  >
+                  <label
+                    ><input type="radio" name="rating" value="4" /><span
+                      >★<small>4</small></span
+                    ></label
+                  >
+                  <label
+                    ><input type="radio" name="rating" value="5" /><span
+                      >★<small>5</small></span
+                    ></label
+                  >
+                </div></fieldset
+              >
+              <label
+                >Cerita Anda<textarea
+                  name="comment"
+                  minlength="10"
+                  maxlength="1500"
+                  rows="5"
+                  required
+                  placeholder="Apa yang paling berkesan dari persiapan atau hasil dekorasi acara Anda?"
+                ></textarea>
+              </label>
+              <p class="field-hint"
+                >10–1.500 karakter. Hindari nomor telepon, alamat lengkap, dan informasi pribadi
+                lainnya.</p
+              >
+              <div class="honeypot" aria-hidden="true"
+                ><label>Website<input name="website" tabindex="-1" autocomplete="off" /></label
+              ></div>
+              <label class="consent-row"
+                ><input type="checkbox" name="consent" required /><span
+                  >Saya menyetujui nama, kota, bintang, dan ulasan ini ditampilkan di halaman ulasan.
+                  <a href="#privacy-note">Tentang data Anda</a></span
+                ></label
+              >
+            </fieldset>
+            <div id="captcha" class="captcha-slot"></div>
+            <button id="submit-review" type="submit" class="btn primary full-width" disabled
+              >Kirim ulasan</button
+            >
+          </form>
+          <noscript
+            ><p
+              >Aktifkan JavaScript untuk mengisi ulasan. Anda juga dapat menghubungi kami lewat
+              WhatsApp.</p
+            ></noscript
+          >
+        </section>
+        <section class="review-feed" aria-labelledby="feed-title">
+          <div class="feed-heading"
+            ><p class="panel-kicker">Pengalaman bersama WGA</p
+            ><h2 id="feed-title">Kata mereka</h2>
+            ><div id="review-summary" class="review-summary" hidden aria-live="polite">
+              <span class="review-summary-stars" aria-hidden="true">★★★★★</span>
+              <strong id="review-average">0,0</strong><span>/ 5</span>
+              <span class="review-summary-divider" aria-hidden="true">·</span>
+              <span id="review-total">0 ulasan</span>
+            </div></div
+          >
+          <p id="feed-status" role="status" class="form-message">Memuat ulasan…</p>
+          <div id="review-list" class="review-list"></div>
+          <button id="more-reviews" class="btn ghost" type="button" hidden
+            >Lihat ulasan lainnya</button
+          >
+        </section>
+      </div>
+      <aside id="privacy-note" class="privacy-note"
+        ><h2>Tentang data Anda</h2
+        ><p
+          >Nama, kota, bintang, dan komentar yang dikirim dapat dibaca pengunjung lain. Ulasan yang
+          dihapus tidak lagi ditampilkan. Kami memakai Cloudflare Turnstile untuk
+          pemeriksaan bot dan menyimpan penanda koneksi tersamarkan untuk membatasi penyalahgunaan.
+          Penanda tersebut dihapus berkala setelah berumur 30 hari. Untuk meminta koreksi atau
+          penghapusan ulasan,
+          <a href="https://wa.me/628179720727">hubungi WGA melalui WhatsApp</a>.</p
+        ></aside
+      >
+    </main>
+    <footer
+      ><div class="container"
+        ><span>WGA Dekorasi · Bali</span
+        ><a href="katalog.html">Lihat katalog perlengkapan ↗</a></div
+      ></footer
+    >
+  </body>
+</html>

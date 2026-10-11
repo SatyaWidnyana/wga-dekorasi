@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>Kelola Ulasan — Admin WGA Dekorasi</title>
+    <link rel="icon" href="assets/wga-mark-32.png" />
+    <link rel="prefetch" href="admin-catalog.html" />
+    <link rel="prefetch" href="admin-moments.html" />
+    <link rel="stylesheet" href="css/style.css?v=20261011" />
+    <link rel="stylesheet" href="css/reviews.css?v=20261011" />
+    <script src="js/review-shared.js?v=20261011" defer></script>
+    <script src="js/admin-auth.js?v=20261011" defer></script>
+    <script src="js/admin-review-list.js?v=1" defer></script>
+  </head>
+  <body class="review-page admin-page">
+    <header class="review-header">
+      <div class="container review-nav">
+        <a class="brand" href="index.html">
+          <img src="assets/wga-mark-64.png" width="45" height="45" alt="" />
+          <span class="title admin-brand-title">WGA <span class="brand-name-accent">Dekorasi</span> <span class="admin-label">Admin</span></span>
+        </a>
+        <nav class="admin-nav-links" aria-label="Navigasi admin">
+          <a href="admin-catalog.html">Kelola katalog</a>
+          <a href="admin-moments.html">Upload momen</a>
+          <a aria-current="page" href="admin-reviews.html">Kelola ulasan</a>
+        </nav>
+        <div class="admin-nav-actions">
+          <button id="logout" class="btn ghost admin-logout" type="button">Log out</button>
+        </div>
+      </div>
+    </header>
+    <main class="container review-main">
+      <section class="admin-page-heading" aria-labelledby="reviews-page-title">
+        <p class="eyebrow">Pengalaman klien</p>
+        <h1 id="reviews-page-title">Kelola ulasan</h1>
+        <p class="form-intro">Tinjau ulasan yang masuk dan hapus ulasan yang tidak ingin ditampilkan.</p>
+        <p id="admin-page-status" class="form-message" role="status"></p>
+      </section>
+      <section id="reviews-panel" class="admin-review-section" aria-labelledby="reviews-title">
+        <h2 id="reviews-title" class="admin-section-title">Semua ulasan</h2>
+        <div class="admin-toolbar">
+          <p class="field-hint">Ulasan baru langsung tampil di halaman publik.</p>
+          <button id="refresh-reviews" class="btn ghost" type="button">Muat ulang</button>
+        </div>
+        <p id="admin-status" class="form-message" role="status"></p>
+        <div id="admin-list" class="admin-list"></div>
+        <button id="more-admin" class="btn ghost" hidden>Muat lebih banyak</button>
+        <p class="field-hint">Ulasan dapat dihapus permanen dari panel ini.</p>
+      </section>
+    </main>
+  </body>
+</html>
